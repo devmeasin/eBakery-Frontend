@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { createStyles, Table, Checkbox, ScrollArea, Group, Avatar, Text, Center, Space, Grid } from '@mantine/core';
+import { createStyles, Table, Checkbox, ScrollArea, Group, Avatar, Text, Center, Image, Grid } from '@mantine/core';
 import { useMediaQuery } from '@mantine/hooks';
 import { CartCounter } from '../../AddToCart/cart-counter';
 import { LazyLoadImage } from 'react-lazy-load-image-component';
@@ -67,14 +67,26 @@ export const Product_Desktop_V = ({ products }) => {
                                                         </td>
                                                         <td>
                                                             <Group spacing="sm">
-                                                                <LazyLoadImage
-                                                                    style={{ borderRadius: '20px' }}
-                                                                    width="100px"
-                                                                    height="100px"
-                                                                    object-fit="cover"
-                                                                    radius='md'
-                                                                    src={products[ProductId]?.product_image}
-                                                                    effect="blur" />
+                                                                {
+                                                                    products[ProductId]?.product_image ?  
+                                                                    <LazyLoadImage
+                                                                        style={{ borderRadius: '20px' }}
+                                                                        width="100px"
+                                                                        height="100px"
+                                                                        object-fit="cover"
+                                                                        radius='md'
+                                                                        src={products[ProductId]?.product_image}
+                                                                        effect="blur" 
+                                                                     /> 
+                                                                     :
+                                                                    <Image
+                                                                        width='100px'
+                                                                        height={100}
+                                                                        radius='md'
+                                                                        withPlaceholder
+                                                                    />
+                                                                }
+                                                                
 
                                                                 <Text size="sm" weight={700}>
                                                                     {products[ProductId]?.title}
