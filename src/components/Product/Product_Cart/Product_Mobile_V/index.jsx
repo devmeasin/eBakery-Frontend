@@ -1,7 +1,9 @@
 import React from 'react';
 import { useStyles } from './product_cart.style';
-import { ScrollArea , Group, Image, Text } from '@mantine/core';
+import { ScrollArea, Group, Image, Text } from '@mantine/core';
 import { LazyLoadImage } from 'react-lazy-load-image-component';
+import { useDispatch } from 'react-redux';
+import { removeItemToCart } from 'store/cartSlice';
 import { IconX } from '@tabler/icons';
 import { CartCounter } from 'components/Product/AddToCart/cart-counter';
 import { Product_Checkout } from '../Product_Checkout';
@@ -10,6 +12,11 @@ export const Product_Mobile_V = ({ products }) => {
 
     const Products_Key = Object.keys(products);
     const { classes } = useStyles();
+    const dispatch = useDispatch();
+
+    const removeItemToCartHandler = (productId) => {
+        dispatch(removeItemToCart(productId));
+    }
 
 
     return (
@@ -39,6 +46,11 @@ export const Product_Mobile_V = ({ products }) => {
                                         />
                                 }
 
+                                <div className={classes.product_cart_rm}
+                                    onClick={() => removeItemToCartHandler(product_Id)}
+                                >
+                                    <IconX size={22} stroke={4} color="red" />
+                                </div>
 
                             </div>
                             <div className={classes.cart_context}>
