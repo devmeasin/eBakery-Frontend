@@ -6,9 +6,9 @@ import { useDispatch } from 'react-redux';
 import { removeItemToCart } from 'store/cartSlice';
 import { IconX } from '@tabler/icons';
 import { CartCounter } from 'components/Product/AddToCart/cart-counter';
-import { Product_Checkout } from '../Product_Checkout';
+import { Cart_Checkout } from '../Cart_Checkout';
 
-export const Product_Mobile_V = ({ products }) => {
+export const Cart_Mobile_V = ({ products }) => {
 
     const Products_Key = Object.keys(products);
     const { classes } = useStyles();
@@ -91,7 +91,7 @@ export const Product_Mobile_V = ({ products }) => {
                 }
             </ScrollArea>
 
-            <Product_Checkout />
+            <Cart_Checkout />
 
         </div>
     )

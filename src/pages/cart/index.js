@@ -3,7 +3,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { Grid } from '@mantine/core';
 import Layout from 'components/Layout/Layout';
 import { Toaster } from 'react-hot-toast';
-import { Cart_Holder } from 'components/Cart_Holder';
+import { Cart_Holder } from 'components/Carts';
 
 const cart = () => {
 
