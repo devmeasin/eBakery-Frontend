@@ -1,13 +1,13 @@
 import React, { useEffect, useState } from 'react';
 
+import Link from 'next/link';
 import { Card, Image, Text, Badge, Button, Group, Title, InputBase, Divider } from '@mantine/core';
 import { IconChecks } from '@tabler/icons';
-import Link from 'next/link';
 import { useSelector, useDispatch } from 'react-redux';
 import { calculateTotals } from 'utils/calculateTotals';
 // import { calculateTotals } from 'store/cartSlice';
 
-export const Product_Checkout = () => {
+export const Cart_Checkout = () => {
 
     const [total, setTotal] = useState(0);
     const [delivery, setDelivery] = useState(60);

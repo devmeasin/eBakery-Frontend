@@ -10,8 +10,22 @@ export const useStyles = createStyles((theme) => ({
         marginBottom: '10px',
         paddingBottom: '10px',
     },
-    image_wrapper : {
-        width:'25%'
+    image_wrapper: {
+        width: '25%',
+        position: 'relative',
+        overflow: 'hidden',
+        borderRadius: '13px'
+    },
+    product_cart_rm: {
+        position: 'absolute',
+        top: 0,
+        left: 0,
+        background: '#00000045',
+        width: '100%',
+        height: '100%',
+        display: 'flex',
+        justifyContent: 'center',
+        alignItems: 'center',
     },
     cart_context: {
         width: '75%',
@@ -19,7 +33,7 @@ export const useStyles = createStyles((theme) => ({
     cart_counter_area: {
         display: 'flex',
         justifyContent: 'space-between',
-         marginLeft: '10px',
+        marginLeft: '10px',
 
     },
     cart_content_area: {
@@ -29,7 +43,7 @@ export const useStyles = createStyles((theme) => ({
 
         }
     },
-    cart_btn_area : {
+    cart_btn_area: {
         display: 'flex',
         width: '35%',
         alignItems: 'end',
