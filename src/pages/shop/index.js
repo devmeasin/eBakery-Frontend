@@ -1,15 +1,40 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import Layout from 'components/Layout/Layout';
 import { useGetProductsDataQuery } from 'store/services/productsApi';
 import { Product } from 'components/Product';
 import { Grid } from '@mantine/core';
+import qs from 'qs';
 import { product_dtos } from 'utils/helpers/product_dtos';
 import { Toaster } from 'react-hot-toast';
+import { LoadMore } from 'components/UI/Button/LoadMore';
 
 const shops = () => {
-    const { data, isLoading, isError, status } = useGetProductsDataQuery();
-    const products = product_dtos(data);
-    // console.log(products)
+
+    const [page, setPage] = useState(0);
+    const [products, setProducts] = useState([]);
+
+    const options = {
+        // sort: ['id:desc'],
+        pagination: {
+            page: page,
+        },
+        populate: '*'
+    };
+
+    const queryString = qs.stringify(options);
+    const { data: productsData, isLoading, isError, status } = useGetProductsDataQuery(queryString);
+
+    const products_filter = product_dtos(productsData?.data);
+
+    useEffect(() => {
+        if (products_filter) {
+            setProducts(prevState => { 
+                return [...prevState, ...products_filter] 
+            });
+        }
+    }, [productsData]);
+
+    console.log(products)
 
     return (
         <Layout loader={isLoading}>
@@ -22,8 +47,46 @@ const shops = () => {
                     ))
                 }
             </Grid>
+
+            <LoadMore meta={productsData?.meta} setPage={setPage} />
         </Layout>
     )
 }
+
+
+// export const getServerSideProps = async ({ query }) => {
+//     // Product
+//     const options = {
+//         sort: ['id:desc'],
+//         pagination: {
+//             page: query.page ? +query.page : 1,
+//         },
+//         populate: '*'
+//     };
+
+//     // if (query.search) {
+//     //     options.filters = {
+//     //         Title: {
+//     //             $containsi: query.search,
+//     //         },
+//     //     };
+//     // }
+
+//     // const queryString = qs.stringify(options);
+
+//     // const { data: articles } = await fetchArticles(queryString);
+//     // const { data: products, isLoading, isError, status } = useGetProductsDataQuery();
+
+//     return {
+//         props: {
+//             // product: {
+//             //     items: products?.data,
+//             //     pagination: products?.meta.pagination,
+//             // },
+//             // isLoading,
+//         },
+//     };
+// };
+
 
 export default shops;
