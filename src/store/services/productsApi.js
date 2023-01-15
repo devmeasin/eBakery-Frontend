@@ -10,8 +10,8 @@ export const productsApi = createApi({
     tagTypes: ['Product'],
     endpoints: (builder) => ({
         getProductsData: builder.query({
-            query: () => 'products?populate=*',
-            transformResponse: (res) => res?.data,
+            query: (queryString) => `products?${queryString}`,
+            transformResponse: (res) => res,
             transformErrorResponse: (res) => res.status,
             providesTags: ['Product'],
         }),
