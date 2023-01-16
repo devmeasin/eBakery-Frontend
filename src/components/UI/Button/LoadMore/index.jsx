@@ -1,21 +1,22 @@
-export const LoadMore = ({ meta , setPage}) => {
+import { Button } from "@mantine/core";
 
-    const { page, pageCount} = meta?.pagination;
+export const LoadMore = ({ meta, setPage }) => {
+
+    const { page, pageCount } = meta?.pagination;
 
     const handlePaginate = () => {
         setPage(page + 1);
     };
-    console.log( meta?.pagination);
 
     return (
-        <div className="flex justify-center mt-24">
+        <div style={{ display: 'flex', alignItem : 'center' , justifyContent:'center', padding : '30px 0px 10px'}}>
             {
                 page >= pageCount ? '' :
-                    <button
+                    <Button radius='lg' variant="gradient" gradient={{ from: 'orange', to: 'red' }}
                         onClick={() => handlePaginate()}
-                        className={`${'bg-primary py-2 px-4 text-white w-24 rounded'}`}>
+                    >
                         Load More..
-                    </button>
+                    </Button>
             }
 
         </div>
