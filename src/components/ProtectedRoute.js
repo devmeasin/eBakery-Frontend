@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useRouter } from "next/router";
 import { useSession } from "next-auth/react";
-import { PageLoader } from './Loader';
+import { PageLoader } from './UI/Loader';
 
 export const IsAuthenticated = ({ children }) => {
 
