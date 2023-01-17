@@ -1,7 +1,7 @@
 import React from 'react';
 import { Container } from '@mantine/core';
 import { NavBar } from './NavBar'
-import { PageLoader } from 'components/Loader';
+import { PageLoader } from 'components/UI/Loader';
 import { StaticFeature } from 'components/StaticFeature';
 
 

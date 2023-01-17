@@ -6,7 +6,7 @@ import { Product } from 'components/Product';
 import { Grid } from '@mantine/core';
 import { product_dtos } from 'utils/helpers/product_dtos';
 import { useGetProductByCategoryQuery } from 'store/services/categoriesApi';
-import { ProductLoader } from 'components/Loader/ProductLoader';
+import { ProductLoader } from 'components/UI/Loader/ProductLoader';
 
 const categoryByProduct = () => {
 

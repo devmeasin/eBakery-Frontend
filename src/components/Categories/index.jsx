@@ -1,6 +1,6 @@
 import { Carousel } from '@mantine/carousel';
 import { Category } from 'components/Categories/Category';
-import { CategoryLoader } from 'components/Loader/CategoryLoader';
+import { CategoryLoader } from 'components/UI/Loader/CategoryLoader';
 import { useGetCategoryDataQuery } from 'store/services/categoriesApi';
 import { categories_dtos } from 'utils/helpers/categories_dtos';
 
