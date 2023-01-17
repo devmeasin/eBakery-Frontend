@@ -7,6 +7,7 @@ import qs from 'qs';
 import { product_dtos } from 'utils/helpers/product_dtos';
 import { Toaster } from 'react-hot-toast';
 import { LoadMore } from 'components/UI/Button/LoadMore';
+import { ProductLoader } from 'components/UI/Loader/ProductLoader';
 
 const shops = () => {
 
@@ -28,13 +29,13 @@ const shops = () => {
 
     useEffect(() => {
         if (products_filter) {
-            setProducts(prevState => { 
-                return [...prevState, ...products_filter] 
+            setProducts(prevState => {
+                return [...prevState, ...products_filter]
             });
         }
     }, [productsData]);
 
-    console.log(products)
+    console.log(status)
 
     return (
         <Layout loader={isLoading}>
@@ -47,8 +48,10 @@ const shops = () => {
                     ))
                 }
             </Grid>
-
-            <LoadMore meta={productsData?.meta} setPage={setPage} />
+            {
+                status === 'pending' && <ProductLoader />
+            }
+            <LoadMore meta={productsData?.meta} setPage={setPage} loader={status !== 'pending'} />
         </Layout>
     )
 }

@@ -1,7 +1,8 @@
 import { Button } from "@mantine/core";
 
-export const LoadMore = ({ meta, setPage }) => {
+export const LoadMore = ({ meta, setPage , loader }) => {
 
+    if(!meta) return;
     const { page, pageCount } = meta?.pagination;
 
     const handlePaginate = () => {
@@ -14,6 +15,7 @@ export const LoadMore = ({ meta, setPage }) => {
                 page >= pageCount ? '' :
                     <Button radius='lg' variant="gradient" gradient={{ from: 'orange', to: 'red' }}
                         onClick={() => handlePaginate()}
+                        loading={loader}
                     >
                         Load More..
                     </Button>
