@@ -17,7 +17,7 @@ export const LoadMore = ({ meta, setPage , loader }) => {
                         onClick={() => handlePaginate()}
                         loading={loader}
                     >
-                        Load More..
+                        Load More
                     </Button>
             }
 
