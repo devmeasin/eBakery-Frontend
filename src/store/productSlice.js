@@ -1,22 +1,29 @@
 import { createSlice } from '@reduxjs/toolkit';
 
 const initialState = {
-    product: [],
+    products: [],
+    pagination: {
+        page: 1,
+        pageCount: 2,
+    },
 }
 
 export const productSlice = createSlice({
-    name: 'product',
+    name: 'productsItem',
     initialState,
     reducers: {
         setProduct: (state, action) => {
-            const data = action.payload;
-            state.product = data;
+            const data = action.payload || [];
+            state.products = [...state.products, ...data];
         },
+        setPagination: (state, action) => {
+            state.pagination = { ...state.pagination, ...action.payload };
+        }
 
     },
 })
 
 // Action creators are generated for each case reducer function
-export const { setProduct } = productSlice.actions
+export const { setProduct, setPagination } = productSlice.actions;
 
 export default productSlice.reducer;
