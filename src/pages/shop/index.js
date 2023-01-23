@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import Layout from 'components/Layout/Layout';
 import { useGetProductsDataQuery } from 'store/services/productsApi';
 import { Product } from 'components/Product';
@@ -8,16 +8,22 @@ import { product_dtos } from 'utils/helpers/product_dtos';
 import { Toaster } from 'react-hot-toast';
 import { LoadMore } from 'components/UI/Button/LoadMore';
 import { ProductLoader } from 'components/UI/Loader/ProductLoader';
+import { useSelector, useDispatch } from 'react-redux';
+import { setProduct, setPagination } from 'store/productSlice';
 
 const shops = () => {
 
-    const [page, setPage] = useState(0);
-    const [products, setProducts] = useState([]);
+    const bottomEndRef = useRef(null);
+    const ProductItems = useSelector((state) => state.productsItem.products);
+    const pagination = useSelector((state) => state.productsItem.pagination);
+    // const [products, setProducts] = useState([]);
+    const dispatch = useDispatch();
 
     const options = {
         // sort: ['id:desc'],
         pagination: {
-            page: page,
+            page: pagination?.page,
+            pageSize: 16
         },
         populate: '*'
     };
@@ -25,17 +31,29 @@ const shops = () => {
     const queryString = qs.stringify(options);
     const { data: productsData, isLoading, isError, status } = useGetProductsDataQuery(queryString);
 
-    const products_filter = product_dtos(productsData?.data);
+    // handle the pagination
+    const handlePaginate = () => {
+        if (pagination?.page < pagination?.pageCount) {
+            dispatch(setPagination({ page: pagination?.page + 1 }));
+
+        }
+    }
+
+    // product dtos
+    const products_dtos = product_dtos(productsData?.data); // productsData?.data;
 
     useEffect(() => {
-        if (products_filter) {
-            setProducts(prevState => {
-                return [...prevState, ...products_filter]
-            });
+        if (pagination?.page <= pagination?.pageCount) {
+            dispatch(setProduct(products_dtos));
+            dispatch(setPagination(productsData?.meta?.pagination));
         }
+
     }, [productsData]);
 
-    console.log(status)
+    useEffect(() => {
+        bottomEndRef.current?.scrollIntoView({ behavior: "smooth" });
+    }, [pagination]);
+
 
     return (
         <Layout loader={isLoading}>
@@ -43,7 +61,7 @@ const shops = () => {
             <h3>Shop Pages</h3>
             <Grid gutter="xs">
                 {
-                    products?.map((product, ind) => (
+                    ProductItems?.map((product, ind) => (
                         <Grid.Col sm={6} md={4} lg={3} key={ind}> <Product product={product} /> </Grid.Col>
                     ))
                 }
@@ -51,7 +69,10 @@ const shops = () => {
             {
                 status === 'pending' && <ProductLoader />
             }
-            <LoadMore meta={productsData?.meta} setPage={setPage} loader={status !== 'pending'} />
+            {
+                pagination?.page < pagination?.pageCount && <LoadMore meta={pagination} handlePaginate={handlePaginate} loader={status === 'pending'} />
+            }
+            <div ref={bottomEndRef} />
         </Layout>
     )
 }
