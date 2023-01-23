@@ -47,7 +47,7 @@ export const SecondNav = () => {
                                                 categoriesData?.map((category, ind) => (
                                                     ind <= 8 ? <Link key={ind} href={`/category/${category.slug}`} passHref>
                                                         <Menu.Item
-                                                            icon={<Image src={category?.category_image} width={30} height={30} />}>
+                                                            icon={<Image withPlaceholder src={category?.category_image} width={30} height={30} />}>
                                                             <b>{category?.name}</b>
                                                         </Menu.Item>
                                                     </Link> : ''
