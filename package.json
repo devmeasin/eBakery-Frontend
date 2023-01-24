@@ -33,6 +33,7 @@
     "embla-carousel-react": "^7.0.3",
     "next": "12.3.1",
     "next-auth": "^4.16.3",
+    "next-images": "^1.8.4",
     "next-pwa": "^5.6.0",
     "next-seo": "^5.5.0",
     "nextjs-progressbar": "^0.0.16",
