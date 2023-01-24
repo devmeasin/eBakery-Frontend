@@ -7,7 +7,7 @@ import { signOut } from "next-auth/react";
 import { useDisclosure, useMediaQuery } from '@mantine/hooks';
 import { IconUserPlus, IconAssembly, IconLogout, IconSettings } from '@tabler/icons';
 
-import { ColorSchemeToggle } from '../../../ColorSchemeToggle/ColorSchemeToggle';
+import { ColorSchemeToggle } from '../../../UI/ColorSchemeToggle/ColorSchemeToggle';
 import { useStyles } from './Navbar.styles';
 import { SearchBar } from '../Search';
 import { useStickNav } from 'hooks/useStickNav';
