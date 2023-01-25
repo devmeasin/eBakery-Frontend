@@ -8,7 +8,6 @@ import { Cart_Holder } from 'components/Carts';
 const cart = () => {
 
     const ProductInCarts = useSelector((state) => state.cartItems.carts);
-    const has_products = Object.keys(ProductInCarts);
 
     return (
         <Layout>

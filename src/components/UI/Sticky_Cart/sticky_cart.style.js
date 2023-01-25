@@ -32,8 +32,8 @@ export const useStyles = createStyles((theme, _params, getRef) => ({
     bag_item : {
         p : {
             margin: '0px',
-            fontWeight: '600',
-            fontSize: '14px',
+            fontWeight: '700',
+            fontSize: '13px',
         }
     }
 
