@@ -1,4 +1,4 @@
-import React from 'react';
+import { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { Grid } from '@mantine/core';
 import Layout from 'components/Layout/Layout';
@@ -7,11 +7,17 @@ import { Cart_Holder } from 'components/Carts';
 
 const cart = () => {
 
+    // use Extra code for hybernate error in cart page
+    const [domLoaded, setDomLoaded] = useState(false);
+
     const ProductInCarts = useSelector((state) => state.cartItems.carts);
-    const has_products = Object.keys(ProductInCarts);
+
+    useEffect(() => {
+        setDomLoaded(true);
+    }, [ProductInCarts]);
 
     return (
-        <Layout>
+        <Layout sticky_cart={false} loader={!domLoaded}>
             {/* <div>
                 <Toaster position="top-right" reverseOrder={false} />
                 <h3>Cart Pages</h3>
@@ -19,7 +25,7 @@ const cart = () => {
                 
             </div> */}
             <div>
-                <Cart_Holder products={ProductInCarts} />
+                {domLoaded && <Cart_Holder products={ProductInCarts} />}
             </div>
         </Layout>
     )

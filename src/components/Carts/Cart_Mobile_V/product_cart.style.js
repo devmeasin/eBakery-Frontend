@@ -2,21 +2,31 @@ import { createStyles } from "@mantine/core";
 
 
 
-export const useStyles = createStyles((theme) => ({
+export const useStyles = createStyles((theme , _params, getRef) => ({
 
     cart_area_wrapper: {
         display: 'flex',
         borderBottom: `2px solid ${theme.colorScheme === 'dark' ? '#fff' : theme.colors.gray[3]}`,
         marginBottom: '10px',
         paddingBottom: '10px',
+        [`&:hover .${getRef('product_cart_rm')}`]: {
+             visibility: 'visible !important',
+        }
+    },
+    image_container: {
+        width: '25%',
+        cursor: 'pointer',
     },
     image_wrapper: {
-        width: '25%',
+        width: '80px',
         position: 'relative',
         overflow: 'hidden',
         borderRadius: '13px'
     },
+
     product_cart_rm: {
+        ref: getRef('product_cart_rm'),
+        visibility: 'hidden',
         position: 'absolute',
         top: 0,
         left: 0,
@@ -26,7 +36,9 @@ export const useStyles = createStyles((theme) => ({
         display: 'flex',
         justifyContent: 'center',
         alignItems: 'center',
+        transition : '.3s all ease-in-out',
     },
+
     cart_context: {
         width: '75%',
     },

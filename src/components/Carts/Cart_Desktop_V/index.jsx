@@ -1,4 +1,3 @@
-import { useState } from 'react';
 import { createStyles, Table, Checkbox, ScrollArea, Group, Avatar, Text, Center, Image, Grid } from '@mantine/core';
 import { useMediaQuery } from '@mantine/hooks';
 import { LazyLoadImage } from 'react-lazy-load-image-component';
@@ -19,6 +18,7 @@ const useStyles = createStyles((theme) => ({
 }));
 
 export const Cart_Desktop_V = ({ products }) => {
+
 
     const dispatch = useDispatch();
     const matches = useMediaQuery('(max-width: 766px)');

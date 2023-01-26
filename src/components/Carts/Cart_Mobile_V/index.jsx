@@ -8,7 +8,7 @@ import { IconX } from '@tabler/icons';
 import { CartCounter } from 'components/Product/AddToCart/cart-counter';
 import { Cart_Checkout } from '../Cart_Checkout';
 
-export const Cart_Mobile_V = ({ products }) => {
+export const Cart_Mobile_V = ({ products, showCH_Area = true, CMHeight }) => {
 
     const Products_Key = Object.keys(products);
     const { classes } = useStyles();
@@ -21,37 +21,47 @@ export const Cart_Mobile_V = ({ products }) => {
 
     return (
         <div>
-            <ScrollArea style={{ height: '400px' }}>
+            <ScrollArea style={{ height: CMHeight ? CMHeight : '400px' }}>
                 {
                     products && Products_Key.map((product_Id) => (
                         <div key={product_Id} className={classes.cart_area_wrapper}>
 
-                            <div className={classes.image_wrapper}>
+                            <div className={classes.image_container}>
+                                <div className={classes.image_wrapper}>
 
-                                {
-                                    products[product_Id]?.product_image ?
-                                        <LazyLoadImage
-                                            style={{ borderRadius: '20px' }}
-                                            width="80px"
-                                            height="80px"
-                                            object-fit="cover"
-                                            radius='md'
-                                            src={products[product_Id]?.product_image}
-                                            effect="blur" /> :
-                                        <Image
-                                            width='80px'
-                                            height={80}
-                                            radius='md'
-                                            withPlaceholder
-                                        />
-                                }
+                                    {
+                                        products[product_Id]?.product_image ?
+                                            <LazyLoadImage
+                                                className={classes.image_wrapper_inner}
+                                                style={{ borderRadius: '20px' }}
+                                                width="80px"
+                                                height="80px"
+                                                object-fit="cover"
+                                                radius='md'
+                                                src={products[product_Id]?.product_image}
+                                                effect="blur" /> :
+                                            <Image
+                                                className={classes.image_wrapper_inner}
+                                                width={80}
+                                                height={80}
+                                                radius='md'
+                                                withPlaceholder
+                                            />
+                                    }
 
-                                <div className={classes.product_cart_rm}
-                                    onClick={() => removeItemToCartHandler(product_Id)}
-                                >
-                                    <IconX size={22} stroke={4} color="red" />
+                                    <div className={classes.product_cart_rm}
+                                        onClick={() => removeItemToCartHandler(product_Id)}
+                                    >
+                                        <div style={{
+                                            width: '25px', height: '25px', background: '#fff', borderRadius: '50%', display: 'flex',
+                                            justifyContent: 'center',
+                                            alignItems: 'center',
+                                        }}>
+                                            <IconX size={15} stroke={4} color="red" />
+                                        </div>
+                                    </div>
+
                                 </div>
-
                             </div>
                             <div className={classes.cart_context}>
                                 <div className={classes.cart_counter_area}>
@@ -90,8 +100,9 @@ export const Cart_Mobile_V = ({ products }) => {
                     ))
                 }
             </ScrollArea>
-
-            <Cart_Checkout />
+            {
+                showCH_Area && <Cart_Checkout />
+            }
 
         </div>
     )
