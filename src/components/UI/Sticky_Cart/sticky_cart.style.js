@@ -15,7 +15,7 @@ export const useStyles = createStyles((theme, _params, getRef) => ({
         top: 'calc(110px + 30%)',
         boxShadow: 'rgb(0 0 0 / 16%) 0px 21px 36px',
         transition: '.1s ease-in-out',
-        zIndex: 99999999,
+        zIndex: 999,
         borderRadius: '10px 0px 0px 10px',
         border: '0px',
         outline: '0px',
