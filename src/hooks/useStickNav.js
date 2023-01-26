@@ -15,7 +15,7 @@ export const useStickNav = () => {
     const scrollHandler = () => {
         let last_scroll_top = 0;
         let scroll_top = window.scrollY;
-        if (scroll_top > last_scroll_top) {
+        if (scroll_top > last_scroll_top + 20) {
             setScroll(true); //removeClass('scrolled-down').addClass('scrolled-up');
         }
         else {
