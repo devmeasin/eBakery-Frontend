@@ -15,6 +15,7 @@ export const useStyles = createStyles((theme , _params, getRef) => ({
     },
     image_container: {
         width: '25%',
+        cursor: 'pointer',
     },
     image_wrapper: {
         width: '80px',

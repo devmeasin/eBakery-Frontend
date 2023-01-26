@@ -52,7 +52,13 @@ export const Cart_Mobile_V = ({ products, showCH_Area = true, CMHeight }) => {
                                     <div className={classes.product_cart_rm}
                                         onClick={() => removeItemToCartHandler(product_Id)}
                                     >
-                                        <IconX size={22} stroke={4} color="red" />
+                                        <div style={{
+                                            width: '25px', height: '25px', background: '#fff', borderRadius: '50%', display: 'flex',
+                                            justifyContent: 'center',
+                                            alignItems: 'center',
+                                        }}>
+                                            <IconX size={15} stroke={4} color="red" />
+                                        </div>
                                     </div>
 
                                 </div>
