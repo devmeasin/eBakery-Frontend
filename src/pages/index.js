@@ -8,7 +8,7 @@ export default function HomePage() {
 		<>
 			<Layout>
 				<HeroSection/>
-				<Categories />
+				<Categories categoryType='slide'/>
 				<Welcome />
 			</Layout>
 		</>
