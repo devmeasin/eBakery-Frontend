@@ -12,7 +12,8 @@ const categoryByProduct = () => {
 
     const router = useRouter();
     const { slug } = router.query;
-    const options = {
+
+    const queryString = qs.stringify({
         populate: '*',
         sort: ['id:desc'],
         filters: {
@@ -20,13 +21,7 @@ const categoryByProduct = () => {
                 slug: slug,
             },
         },
-        // pagination: {
-        //     page: query.page ? +query.page : 1,
-        //     pageSize: 1,
-        // },
-    };
-
-    const queryString = qs.stringify(options);
+    });
 
     const { data, isLoading, isError, status } = useGetProductByCategoryQuery(queryString);
     const products = product_dtos(data);
