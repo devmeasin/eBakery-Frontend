@@ -1,4 +1,5 @@
 import React from 'react';
+import qs from 'qs';
 import { Card, Grid, Image, Text, Badge, Button, Group, Title } from '@mantine/core';
 import { useMediaQuery } from '@mantine/hooks';
 import { useRef } from 'react';
@@ -13,17 +14,35 @@ import { TabBottom } from './TabBottom';
 import { ProductDescription } from './ProductDescription';
 import { StaticFeatureCard } from 'components/StaticFeature/StaticFeatureCard';
 import { staticFeatureData } from 'static/staticFeature';
+import { useGetProductByCategoryQuery } from 'store/services/categoriesApi';
+import { product_dtos } from 'utils/helpers/product_dtos';
+import { RelatedProduct } from '../RelatedProduct';
 
 export const ProductDetails = ({ product }) => {
 
     const carts = useSelector((state) => state.cartItems.carts);
+
 
     const autoplay = useRef(Autoplay({ delay: 3000 }));
     const matches = useMediaQuery('(min-width: 992px)');
 
     const product_details = product[0];
 
-    console.log(staticFeatureData);
+    const queryString = qs.stringify({
+        populate: '*',
+        sort: ['id:desc'],
+        filters: {
+            category: {
+                slug: product_details?.category?.slug,
+            },
+        },
+    });
+
+    const { data, isLoading, isError, status } = useGetProductByCategoryQuery(queryString);
+    const RelatedProducts = product_dtos(data) || [];
+
+    console.log({ RelatedProducts });
+
 
     return (
         <div>
@@ -195,6 +214,12 @@ export const ProductDetails = ({ product }) => {
             {product_details?.description && <TabBottom />}
             {
                 product_details?.description && <ProductDescription description={product_details?.description} />
+            }
+
+            {
+                RelatedProducts.length > 0 && <div>
+                    <RelatedProduct categoryOfProduct={RelatedProducts} />
+                </div>
             }
 
         </div >
