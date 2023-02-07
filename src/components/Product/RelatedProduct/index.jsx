@@ -5,7 +5,7 @@ import { Product } from '..';
 export const RelatedProduct = ({ categoryOfProduct = [] }) => {
     return (
         <div>
-            <Carousel slideSize="25%" slidesToScroll={3} height={400} slideGap="md" dragFree >
+            <Carousel align="start" slideSize="25%" slidesToScroll={3} height={400} slideGap="md" dragFree >
                 {
                     categoryOfProduct.map((product, ind) => (
                         <Carousel.Slide key={ind}>
